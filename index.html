@@ -9,88 +9,164 @@
     
     <style>
         :root {
-            --primary-color: #0056b3;
-            --bg-color: #f9f9f9;
-            --card-bg: white;
-            --text-main: #333;
-            --text-muted: #777;
+            /* Wisdom Blue Spectrum */
+            --deep-wisdom: #002347;
+            --primary-blue: #0056b3;
+            --light-wisdom: #eef6ff;
+            --accent-blue: #00aaff;
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --text-main: #1a1a1a;
+            --text-muted: #555;
         }
 
         body { 
-            font-family: Tahoma, "Vazirmatn", "Segoe UI", Roboto, Arial, sans-serif; 
+            font-family: "Vazirmatn", Tahoma, "Segoe UI", Roboto, Arial, sans-serif; 
             line-height: 1.8; 
             color: var(--text-main); 
-            max-width: 800px; 
+            max-width: 900px; 
             margin: 0 auto; 
-            padding: 2rem; 
-            background: var(--bg-color); 
-            text-align: justify;
+            padding: 1rem; 
+            background: var(--bg-gradient); 
+            min-height: 100vh;
         }
 
         .lang-switch {
             text-align: center;
-            margin-bottom: 2rem;
+            margin: 1rem auto 2.5rem;
             position: sticky;
-            top: 10px;
-            z-index: 100;
-            background: rgba(249, 249, 249, 0.9);
-            padding: 10px;
-            border-radius: 30px;
-        }
-        .lang-btn {
-            background: #fff;
-            border: 1px solid #ccc;
-            padding: 5px 12px;
-            cursor: pointer;
-            border-radius: 20px;
-            font-weight: bold;
-            margin: 3px;
-            font-size: 0.85rem;
-            transition: all 0.2s;
-        }
-        .lang-btn.active {
-            background: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
+            top: 15px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 8px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: fit-content;
+            border: 1px solid rgba(255,255,255,0.3);
         }
 
-        header { margin-bottom: 3rem; text-align: center; }
-        h1 { border-bottom: 2px solid var(--primary-color); padding-bottom: 15px; color: var(--primary-color); font-size: 2rem; }
+        .lang-btn {
+            background: transparent;
+            border: none;
+            padding: 6px 16px;
+            cursor: pointer;
+            border-radius: 25px;
+            font-weight: 600;
+            margin: 2px;
+            font-size: 0.85rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: var(--deep-wisdom);
+        }
+
+        .lang-btn.active {
+            background: var(--primary-blue);
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 86, 179, 0.3);
+        }
+
+        header { margin-bottom: 4rem; text-align: center; padding: 0 1rem; }
+        
+        h1 { 
+            color: var(--deep-wisdom); 
+            font-size: 2.5rem; 
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        main { padding: 0 1rem; }
 
         .article-card { 
             background: var(--card-bg); 
-            padding: 25px; 
-            margin-bottom: 25px; 
-            border-radius: 8px; 
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08); 
-            transition: all 0.3s ease;
+            padding: 35px; 
+            margin-bottom: 30px; 
+            border-radius: 16px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.5);
         }
 
-        /* Directional Logic */
-        [dir="rtl"] .article-card { border-right: 6px solid var(--primary-color); text-align: right; }
-        [dir="rtl"] .article-card a::after { content: " ←"; }
+        /* Directional Logic & Decorative Borders */
+        [dir="rtl"] .article-card { border-right: 8px solid var(--primary-blue); text-align: right; }
+        [dir="rtl"] .article-card a::after { content: " ←"; transition: transform 0.3s; display: inline-block; }
+        [dir="rtl"] .article-card a:hover::after { transform: translateX(-5px); }
 
-        [dir="ltr"] .article-card { border-left: 6px solid var(--primary-color); text-align: left; }
-        [dir="ltr"] .article-card a::after { content: " →"; }
+        [dir="ltr"] .article-card { border-left: 8px solid var(--primary-blue); text-align: left; }
+        [dir="ltr"] .article-card a::after { content: " →"; transition: transform 0.3s; display: inline-block; }
+        [dir="ltr"] .article-card a:hover::after { transform: translateX(5px); }
 
-        .article-card:hover { transform: translateY(-5px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-        .article-card h2 { margin-top: 0; color: #222; font-size: 1.5rem; }
-        .article-card a { text-decoration: none; color: var(--primary-color); font-weight: bold; display: inline-block; margin-top: 10px; }
+        .article-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 15px 40px rgba(0, 35, 71, 0.15); 
+            background: #fff;
+        }
 
-        .coming-soon { opacity: 0.7; }
-        .status-badge { display: inline-block; background: #eee; padding: 2px 10px; border-radius: 4px; font-size: 0.85rem; color: #777; margin-top: 10px; }
+        .article-card h2 { margin-top: 0; color: var(--deep-wisdom); font-size: 1.7rem; line-height: 1.4; }
+        .article-card p { color: var(--text-muted); font-size: 1.05rem; }
+        
+        .article-card a { 
+            text-decoration: none; 
+            color: var(--primary-blue); 
+            font-weight: 700; 
+            display: inline-block; 
+            margin-top: 15px; 
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .article-card a:hover { border-color: var(--primary-blue); }
 
-        .footer { margin-top: 60px; padding-top: 20px; font-size: 0.9rem; color: var(--text-muted); text-align: center; border-top: 1px solid #ddd; }
+        .coming-soon { 
+            background: rgba(255, 255, 255, 0.6); 
+            border-color: #cbd5e0 !important;
+        }
+        
+        .status-badge { 
+            display: inline-block; 
+            background: var(--light-wisdom); 
+            padding: 4px 14px; 
+            border-radius: 8px; 
+            font-size: 0.8rem; 
+            color: var(--primary-blue); 
+            margin-top: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .footer { 
+            margin-top: 80px; 
+            padding: 40px 20px; 
+            font-size: 0.85rem; 
+            color: var(--deep-wisdom); 
+            text-align: center; 
+            border-top: 1px solid rgba(0,0,0,0.1); 
+        }
 
         /* Visibility Logic */
-        .content-lang { display: none; }
-        html[lang="fa"] .lang-fa { display: block; }
-        html[lang="en"] .lang-en { display: block; }
-        html[lang="ar"] .lang-ar { display: block; }
-        html[lang="zh"] .lang-zh { display: block; }
-        html[lang="fr"] .lang-fr { display: block; }
-        html[lang="ru"] .lang-ru { display: block; }
-        html[lang="es"] .lang-es { display: block; }
+        .content-lang { display: none; animation: fadeIn 0.5s ease; }
+        html[lang="fa"] .lang-fa, html[lang="en"] .lang-en, html[lang="ar"] .lang-ar,
+        html[lang="zh"] .lang-zh, html[lang="fr"] .lang-fr, html[lang="ru"] .lang-ru,
+        html[lang="es"] .lang-es, html[lang="tr"] .lang-tr { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .lang-switch { border-radius: 15px; width: 95%; }
+            .article-card { padding: 20px; }
+        }
     </style>
 </head>
 <body>
@@ -100,19 +176,21 @@
         <button class="lang-btn" onclick="setLanguage('en')">English</button>
         <button class="lang-btn" onclick="setLanguage('ar')">العربية</button>
         <button class="lang-btn" onclick="setLanguage('zh')">中文</button>
-        <button class="lang-btn" onclick="setLanguage('fr')">Français</button>
         <button class="lang-btn" onclick="setLanguage('ru')">Русский</button>
+        <button class="lang-btn" onclick="setLanguage('tr')">Türkçe</button>
+        <button class="lang-btn" onclick="setLanguage('fr')">Français</button>
         <button class="lang-btn" onclick="setLanguage('es')">Español</button>
     </nav>
 
     <header>
-        <div class="content-lang lang-fa"><h1>فهرست مقالات</h1><p>تحلیل‌های تاریخی و انسانی با تکیه بر خرد ناب</p></div>
-        <div class="content-lang lang-en"><h1>List of Articles</h1><p>Historical and humanitarian analyses relying on pure wisdom</p></div>
-        <div class="content-lang lang-ar"><h1>قائمة المقالات</h1><p>تحليلات تاريخية وإنسانية تعتمد على الحكمة الخالصة</p></div>
-        <div class="content-lang lang-zh"><h1>文章列表</h1><p>依靠纯粹智慧的历史与人道主义分析</p></div>
-        <div class="content-lang lang-fr"><h1>Liste des Articles</h1><p>Analyses historiques et humanitaires s'appuyant sur la sagesse pure</p></div>
-        <div class="content-lang lang-ru"><h1>Список статей</h1><p>Исторический и гуманитарный анализ, основанный на чистой мудрости</p></div>
-        <div class="content-lang lang-es"><h1>Lista de Artículos</h1><p>Análisis históricos y humanitarios basados en la sabiduría pura</p></div>
+        <div class="content-lang lang-fa"><h1>فهرست مقالات</h1><p class="subtitle">تحلیل‌های تاریخی و انسانی با تکیه بر خرد ناب</p></div>
+        <div class="content-lang lang-en"><h1>List of Articles</h1><p class="subtitle">Historical and humanitarian analyses relying on pure wisdom</p></div>
+        <div class="content-lang lang-ar"><h1>قائمة المقالات</h1><p class="subtitle">تحليلات تاريخية وإنسانية تعتمد على الحكمة الخالصة</p></div>
+        <div class="content-lang lang-zh"><h1>文章列表</h1><p class="subtitle">依靠纯粹智慧的历史与人道主义分析</p></div>
+        <div class="content-lang lang-fr"><h1>Liste des Articles</h1><p class="subtitle">Analyses historiques et humanitaires s'appuyant sur la sagesse pure</p></div>
+        <div class="content-lang lang-ru"><h1>Список статей</h1><p class="subtitle">Исторический и гуманитарный анализ, основанный на чистой мудрости</p></div>
+        <div class="content-lang lang-es"><h1>Lista de Artículos</h1><p class="subtitle">Análisis históricos y humanitarios basados en la sabiduría pura</p></div>
+        <div class="content-lang lang-tr"><h1>Makale Listesi</h1><p class="subtitle">Saf bilgeliğe dayalı tarihi ve insani analizler</p></div>
     </header>
 
     <main>
@@ -152,6 +230,11 @@
                 <p>Este escrito examina el lugar fundamental de la "sabiduría" y el papel vital del "lenguaje" en la transformación de la conciencia individual en una civilización colectiva.</p>
                 <a href="../in-praise-for-wisdom/">Leer artículo</a>
             </div>
+            <div class="content-lang lang-tr">
+                <h2>Bilgeliğe Övgü: Bilinç, Dil ve Medeniyet Arasındaki İlişkiyi Yeniden Okumak</h2>
+                <p>Bu yazı, bireysel bilincin kolektif medeniyete dönüşmesinde "bilgeliğin" temel yerini ve "dilin" hayati rolünü incelemektedir.</p>
+                <a href="../in-praise-for-wisdom/">Makaleyi Oku</a>
+            </div>
         </article>
 
         <article class="article-card coming-soon">
@@ -162,6 +245,7 @@
             <div class="content-lang lang-fr"><h2>Éloge de la vie</h2><p>Explorer les coûts humains du radicalisme et le conflit entre les idéologies centrées sur la mort et le droit à la vie.</p><div class="status-badge">En recherche</div></div>
             <div class="content-lang lang-ru"><h2>В похвалу жизни</h2><p>Исследование человеческих издержек радикализма и конфликта между идеологиями культа смерти и правом на жизнь.</p><div class="status-badge">В процессе исследования</div></div>
             <div class="content-lang lang-es"><h2>Elogio de la vida</h2><p>Explorando los costos humanos del radicalismo y el conflicto entre las ideologías centradas en la muerte y el derecho a la vida.</p><div class="status-badge">En investigación</div></div>
+            <div class="content-lang lang-tr"><h2>Yaşama Övgü</h2><p>Radikalizmin insani maliyetlerini ve ölüm odaklı ideolojiler ile yaşam hakkı arasındaki çatışmayı incelemek.</p><div class="status-badge">Araştırma Aşamasında</div></div>
         </article>
 
         <article class="article-card coming-soon">
@@ -172,6 +256,7 @@
             <div class="content-lang lang-fr"><h2>Éloge de la liberté</h2><p>Expliquer la liberté comme condition préalable scientifique à la pensée divergente et son rôle dans l'épanouissement de la civilisation.</p><div class="status-badge">En préparation</div></div>
             <div class="content-lang lang-ru"><h2>В похвалу свободе</h2><p>Объяснение свободы как научной предпосылки дивергентного мышления и её роли в расцвете человеческой цивилизации.</p><div class="status-badge">В процессе подготовки</div></div>
             <div class="content-lang lang-es"><h2>Elogio de la libertad</h2><p>Explicar la libertad como un prerrequisito científico para el pensamiento divergente y su papel en el florecimiento de la civilización.</p><div class="status-badge">En preparación</div></div>
+            <div class="content-lang lang-tr"><h2>Özgürlüğe Övgü</h2><p>Farklı düşünmenin bilimsel bir ön koşulu olarak özgürlüğün açıklanması ve insan medeniyetinin gelişmesindeki rolü.</p><div class="status-badge">Hazırlanıyor</div></div>
         </article>
     </main>
 
@@ -183,6 +268,7 @@
         <div class="content-lang lang-fr"><p>© 2026 Salar Basiri. Tous droits réservés. Publié sous licence CC BY-NC-ND 4.0</p></div>
         <div class="content-lang lang-ru"><p>© 2026 Салар Басири. Все права защищены. Опубликовано под лицензией CC BY-NC-ND 4.0</p></div>
         <div class="content-lang lang-es"><p>© 2026 Salar Basiri. Todos los derechos reservados. Publicado bajo licencia CC BY-NC-ND 4.0</p></div>
+        <div class="content-lang lang-tr"><p>© 2026 Salar Basiri. Tüm hakları saklıdır. CC BY-NC-ND 4.0 lisansı altında yayınlanmıştır.</p></div>
     </footer>
 
     <script>
